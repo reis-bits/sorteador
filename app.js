@@ -6,6 +6,12 @@ function sortear() {
     let doNumero = parseInt(document.getElementById('de').value);
     let ateNumero = parseInt(document.getElementById('ate').value);
 
+    // Valida se a quantidade de números ou o intervalo não foram preenchidos
+    if (isNaN(quantidadeDeNumeros) || isNaN(doNumero) || isNaN(ateNumero)) {
+        alert('Insira uma quantidade de números e um espaço amostral válido!');
+        return;
+    }
+
     // Array vazio que eventualmente receberá os números aleatórios.
     let numerosAleatorios = [];
     // Variável com o número obtido através do laço abaixo
@@ -79,7 +85,7 @@ function reiniciar() {
     document.getElementById('ate').value = '';
     document.getElementById('de').value = '';
 
-    document.getElementById('resultado').inner = `<label class="texto__paragrafo">Número(s) sorteado(s):  nenhum até agora</label>`;
+    document.getElementById('resultado').innerHTML = `<label class="texto__paragrafo">Número(s) sorteado(s):  nenhum até agora</label>`;
 
     alterarStatusReiniciar();
 }
