@@ -1,5 +1,38 @@
+// Coleta todos os inputs criando uma NodeList.
+const inputsQtdDoAte = document.querySelectorAll('#quantidade, #de, #ate');
+
+// Implementação de navegação por teclado.
+function sortearPorTeclado() {
+
+    // Executa a função para cada elemento do array. 
+    // O primeiro parâmentro (element) referencia o elemento atual do Array (neste caso, NodeList) e i representa o índice dele.
+    inputsQtdDoAte.forEach((element, i) => {
+        // Começa a ouvir os eventos do elemento atual (Exemplo: input da quantidade) e coloca para executar um evento (genérico) ao clicar uma tecla.
+        element.addEventListener('keydown', (event) => {
+            // Se a tecla do evento for 'Enter', executa o bloco de código.
+            if (event.key === 'Enter') {
+                // Se o - índice do - elemento atual, não for o último (Calculado pelo tamanho da lista - 1),  executa o bloco de código
+                if (i < inputsQtdDoAte.length - 1) {
+                    // Foca no próximo elemento (neste caso, no próximo input).
+                    inputsQtdDoAte[i + 1].focus();
+
+                // Do contrário...    (se for o último)
+                } else {
+                    // Chama a função para realizar o sorteio
+                    sortearPorBotao();
+                } 
+                event.preventDefault(); // Previne o comportamento padrão
+            }
+        });
+    });
+}
+
+// Define a função a ser executada quando a janela carregar
+window.onload = sortearPorTeclado;
+
+
 // Função que sorteia os número com base nos valores obtidos no HTML.
-function sortear() {
+function sortearPorBotao() {
 
     // Declara, a quantidade dos números, de qual número e até qual número vamos sortear.
     let quantidadeDeNumeros = parseInt(document.getElementById('quantidade').value);
@@ -25,7 +58,7 @@ function sortear() {
 
         // Enquanto a lista (array) de números incluir o número pego, a função deve se repetir até tirar um número diferente.
         while (numerosAleatorios.includes(numero)) {
-            numero = obterNumerosAleatorios(doNumero,ateNumero);
+            numero = obterNumerosAleatorios(doNumero, ateNumero);
         }
 
         // Por fim, empurra o número obtido dentro do Array.
@@ -59,12 +92,12 @@ function obterNumerosAleatorios(min, max) {
 
 // Função que altera o status do botão reiniciar.
 function alterarStatusReiniciar() {
-    
+
     // Declara o botão de reiniciar.
     const reiniciar = document.getElementById('btn-reiniciar')
 
     // Condicionais que dizem que, se um botão contém a classe de desabilitado, que esta deve ser removida, e adicionada a de habilitado.
-    if(reiniciar.classList.contains('container__botao-desabilitado')) {
+    if (reiniciar.classList.contains('container__botao-desabilitado')) {
 
         reiniciar.classList.remove('container__botao-desabilitado');
         reiniciar.classList.add('container__botao');
@@ -80,7 +113,7 @@ function alterarStatusReiniciar() {
 
 
 // Reinicia as variáveis do JavaSript e limpa o HTML, bloco de código maçante que já vi em todos esses exercícios.
-function reiniciar() {
+function reiniciarPorBotao() {
     document.getElementById('quantidade').value = '';
     document.getElementById('ate').value = '';
     document.getElementById('de').value = '';
